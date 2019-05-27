@@ -7,5 +7,7 @@
         "unordered_map": "cpp",
         "vector": "cpp",
         "initializer_list": "cpp"
-    }
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Enabled",
+    "C_Cpp.errorSquiggles": "Disabled"
 }
