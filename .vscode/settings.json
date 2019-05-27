@@ -26,6 +26,12 @@
     ],
     "clang.completion.enable": true,
     "files.associations": {
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "vector": "cpp",
+        "ostream": "cpp",
+        "__split_buffer": "cpp",
+        "iterator": "cpp",
+        "string": "cpp",
+        "string_view": "cpp"
     } // 效果比cpptools要好
 }

@@ -1,12 +1,16 @@
 {
     "configurations": [
         {
-            "name": "MinGW",
-            "intelliSenseMode": "gcc-x64",
-            "compilerPath": "C:/LLVM/bin/clang++.exe",
+            "name": "Mac",
+            "intelliSenseMode": "clang-x64",
+            "compilerPath": "/usr/bin/clang++",
             "includePath": [
-                "${workspaceFolder}"
-            ],
+                "${workspaceFolder}",
+                "/Library/Developer/CommandLineTools/usr/include/c++/v1",
+                "/usr/local/include",
+                "/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/include",
+                "/Library/Developer/CommandLineTools/usr/include"
+                ],
             "defines": [],
             "browse": {
                 "path": [

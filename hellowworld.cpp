@@ -1,8 +1,9 @@
+#include <float.h>
 #include <iostream>
 #include <vector>
-#include <float.h>
 
 using namespace std;
+
 
 int main()
 {
@@ -22,6 +23,6 @@ int main()
     cout << "Hello,World!2" << endl;
     cout << "123" << endl;
 
-    system("pause");
+    getchar(); 
     return 1;
 }
