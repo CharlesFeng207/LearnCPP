@@ -6,7 +6,6 @@ using namespace std;
 
 int main()
 {
-  
     float ff = 1.2;   
     int a = 1;
     
