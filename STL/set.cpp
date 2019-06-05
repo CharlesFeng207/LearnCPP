@@ -12,14 +12,14 @@ int main()
     s.insert("asd");
     s.insert("asd2");
 
-    for (set<string>::iterator i = s.begin(); i != s.end(); i++)
+    for (auto i = s.begin(); i != s.end(); i++)
     {
         cout << *i << " " << endl;
     }
 
     cout << endl;
 
-    set<string>::iterator iter = s.find("asd");
+    auto iter = s.find("asd");
     if (iter != s.end())
     {
         cout << "666 " << *iter << endl;

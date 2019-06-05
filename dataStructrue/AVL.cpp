@@ -1,3 +1,8 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
 typedef char KeyType; //关键字
 
 typedef struct MyRcdType //记录

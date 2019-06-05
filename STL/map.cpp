@@ -17,9 +17,13 @@ int main()
     // cout << m[0] << endl;
     // m[1] = "321";
 
-    map<int, string>::iterator iter;
-    for (iter = m.begin(); iter != m.end(); iter++)
+    auto iter = m.begin();
+
+    while (iter != m.end())
+    {
         cout << iter->first << ':' << iter->second << endl;
+        iter++;
+    }
 
     iter = m.find(1);
     if (iter != m.end())
