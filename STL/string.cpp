@@ -1,4 +1,3 @@
-#include <float.h>
 #include <iostream>
 #include <string>
 
@@ -6,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    string *ps = new string("Memory Management");
+    auto *ps = new string("Memory Management");
     cout << "size() " << ps->size() << endl;
     cout << "sizeof() " << sizeof(*ps) << endl;
 
