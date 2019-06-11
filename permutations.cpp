@@ -25,25 +25,36 @@ void printVector(vector<T> vector)
     }
 }
 
-/* 
-This function takes three parameters:  
-1. String  
-2. Starting index of the string  
-3. Ending index of the string. */
-void permute(char *a, int l, int r)
+template <typename T>
+void inner_permutations(T &v, int l, int r, vector<T> &result)
 {
     int i;
     if (l == r)
-        cout << a << endl;
+        result.emplace_back(v);
     else
     {
         for (i = l; i <= r; i++)
         {
-            iter_swap((a + l), (a + i));
-            permute(a, l + 1, r);
-            iter_swap((a + l), (a + i)); //backtrack
+            swap(v[l], v[i]);
+
+            inner_permutations(v, l + 1, r, result);
+
+            swap(v[l], v[i]); //backtrack
         }
     }
+}
+
+/* 
+This function takes three parameters:  
+1. vector  
+2. Starting index of the vector  
+3. Ending index of the vector. */
+template <typename T>
+vector<T> permutations(T &v)
+{
+    auto result = vector<T>();
+    inner_permutations(v, 0, v.size()-1, result);
+    return result;
 }
 
 int main()
@@ -58,12 +69,29 @@ int main()
         printVector<int>(*v);
     } while (next_permutation(v->begin(), v->end()));
 
-    char str[] = "ABC";
-    int n = strlen(str);
-    permute(str, 0, n - 1);
+    cout << "recursive permutation vector<int>" << endl;
 
-    delete v;
-    delete vv;
+    auto v2 = vector<int>(*vv);
 
-    getchar();
+    auto result =
+        permutations<vector<int>>(v2);
+
+    for_each(result.begin(), result.end(), [](vector<int> &t) {
+        printVector<int>(t);
+    });
+
+    cout << "recursive permutation string" << endl;
+
+    char ca[] = "ABC";
+    string str = ca;
+
+   auto result2 = permutations<string>(str);
+   for_each(result2.begin(), result2.end(), [](string &t) {
+       cout << t << endl;
+   });
+
+   delete v;
+   delete vv;
+
+   getchar();
 }

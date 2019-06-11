@@ -54,8 +54,9 @@ vector<T> combine(T &data, int m)
 
     int depth = 0;
     vector<T> result;
-    T temp(m, 0);
-    combine_inner(data, 0, data.size(), m, depth, temp, result);
+    T t(m);
+    combine_inner(data, 0, data.size(), m, depth, t, result);
+    
     return move(result);
 }
 
