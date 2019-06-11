@@ -1,7 +1,23 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
+
+string join(const vector<string> &v, string c)
+{
+    string s;
+
+    for (auto p = v.begin();
+         p != v.end(); ++p)
+    {
+        s += *p;
+        if (p != v.end() - 1)
+            s += c;
+    }
+
+    return s;
+}
 
 int main()
 {
@@ -32,6 +48,16 @@ int main()
 
     int t = stoi(s);
     cout << t << endl;
+
+    vector<string> v{"Hello, ", " Cruel ", "World!"};
+
+    string st;
+    for (const auto &piece : v)
+        st += piece;
+
+    cout << st << endl;
+
+    cout << join(v, "^") << endl;
 
     getchar();
 }

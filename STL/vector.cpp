@@ -1,8 +1,8 @@
 #include <deque>
 #include <iostream>
+#include <stack>
 #include <string>
 #include <vector>
-#include <stack>
 
 using namespace std;
 
@@ -10,6 +10,7 @@ template <class T>
 void printVector(vector<T> vector)
 {
     cout << "[";
+
     int size = vector.size();
     for (int i = 0; i < size; i++)
     {
