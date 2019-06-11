@@ -48,6 +48,9 @@ int main()
     cout << "sort + lamda" << endl;
     sort(v->begin(), v->end(), [](int &a, int &b) { return a < b; });
     printVector<int>(*v);
+    random_shuffle(v->begin(), v->end());
+    sort(v->begin(), v->end());
+    printVector<int>(*v);
 
     cout << "binary_search: 4 (must perform in a sorted vector)" << endl;
     cout << binary_search(v->begin(), v->end(), 4) << endl;

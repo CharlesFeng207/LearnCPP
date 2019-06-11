@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cstring>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -21,22 +22,6 @@ void printVector(vector<T> vector)
             cout << vector[i] << "]" << endl;
         }
     }
-}
-
-void test_permutation()
-{
-    cout << "test_permutation" << endl;
-
-    auto vv = new vector<int>{1, 3, 2};
-    auto v = new vector<int>(*vv);
-
-    do
-    {
-        printVector<int>(*v);
-    } while (next_permutation(v->begin(), v->end()));
-
-    delete v;
-    delete vv;
 }
 
 template <typename T>
@@ -74,7 +59,7 @@ vector<T> combine(T &data, int m)
     return move(result);
 }
 
-void test_combination()
+int main()
 {
     cout << "test_combination" << endl;
 
@@ -86,11 +71,5 @@ void test_combination()
     });
 
     delete v;
-}
-
-int main()
-{
-    test_permutation();
-    test_combination();
     getchar();
 }
