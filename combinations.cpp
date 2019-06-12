@@ -2,7 +2,9 @@
 #include <cstring>
 #include <iostream>
 #include <string>
+#include <type_traits>
 #include <vector>
+
 using namespace std;
 
 template <class T>
@@ -25,52 +27,83 @@ void printVector(vector<T> vector)
 }
 
 template <typename T>
-void combine_inner(T &data, int start, int n, int m,
-                   int depth, T temp, vector<T> &result)
+void inner_combinations(T &v, int currentIndex, int currentDepth, int endingDepth, T &temp, vector<T> &result)
 {
-    if (depth == m - 1)
+    if (currentDepth > endingDepth)
     {
-        //最内层循环 将temp加入result
-        for (int i = start; i < n - (m - depth - 1); ++i)
-        {
-            temp[depth] = data[i];
-            result.emplace_back(temp);
-        }
+        result.emplace_back(temp);
     }
     else
-        for (int i = start; i < n - (m - depth - 1); ++i)
+    {
+        auto endingIndex = v.size() - temp.size() + currentDepth;
+        for (auto i = currentIndex; i <= endingIndex; i++)
         {
-            temp[depth] = data[i]; //每层输出一个元素
-            combine_inner(data, i + 1, n, m, depth + 1, temp, result);
+            temp[currentDepth] = v[i];
+
+            inner_combinations(v, i + 1, currentDepth + 1, endingDepth, temp, result);
         }
+    }
 }
 
-//T可以调入vector<int>, string等，需要支持下标[]操作及size()函数
 template <typename T>
-vector<T> combine(T &data, int m)
+vector<T> combinations(T &v, int count)
 {
-    if (m <= 0)
+    auto size = v.size();
+    if (count > size)
         return {};
 
-    int depth = 0;
     vector<T> result;
-    T t(m);
-    combine_inner(data, 0, data.size(), m, depth, t, result);
-    
-    return move(result);
+
+    T t(count);
+    inner_combinations(v, 0, 0, count - 1, t, result);
+
+    return result;
+}
+
+template <typename T>
+vector<T> combinations(string &v, int count)
+{
+    auto size = v.size();
+    if (count > size)
+        return {};
+
+    vector<T> result;
+
+    string t("", count);
+    inner_combinations(v, 0, 0, count - 1, t, result);
+
+    return result;
 }
 
 int main()
 {
-    cout << "test_combination" << endl;
+    cout << "loop combination examples" << endl;
+    vector<int> A{1, 2, 3, 4, 5};
+    for (int i = 0; i < A.size() - 2; ++i)
+        for (int j = i + 1; j < A.size() - 1; ++j)
+            for (int k = j + 1; k < A.size(); ++k)
+            {
+                cout << A[i] << A[j] << A[k] << endl;
+            }
 
-    auto v = new vector<int>{1, 3, 2, 1};
+    cout << "test_combination vector<int>" << endl;
 
-    auto result = combine<vector<int>>(*v, 2);
-    for_each(result.begin(), result.end(), [](vector<int> &t) {
+    auto v = new vector<int>{1, 2, 3, 4, 5};
+
+    auto result = combinations<vector<int>>(*v, 3);
+    for (auto &t : result)
         printVector<int>(t);
-    });
 
+    cout << "count: " << result.size() << endl;
+
+    cout << "test_combination string" << endl;
+
+    string str = "ABCDE";
+    auto result2 = combinations<string>(str, 3);
+    for (auto &t : result2)
+        cout << t << endl;
+    cout << "count: " << result.size() << endl;
+    
     delete v;
     getchar();
 }

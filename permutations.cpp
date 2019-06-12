@@ -26,34 +26,30 @@ void printVector(vector<T> vector)
 }
 
 template <typename T>
-void inner_permutations(T &v, int l, int r, vector<T> &result)
+void inner_permutations(T &v, int currentDepth, int endingDepth, vector<T> &result)
 {
-    int i;
-    if (l == r)
+    if (currentDepth == endingDepth)
         result.emplace_back(v);
     else
     {
-        for (i = l; i <= r; i++)
+        for (auto i = currentDepth; i <= endingDepth; i++)
         {
-            swap(v[l], v[i]);
+            swap(v[currentDepth], v[i]);
 
-            inner_permutations(v, l + 1, r, result);
+            inner_permutations(v, currentDepth + 1, endingDepth, result);
 
-            swap(v[l], v[i]); //backtrack
+            swap(v[currentDepth], v[i]); //backtrack
         }
     }
 }
 
-/* 
-This function takes three parameters:  
-1. vector  
-2. Starting index of the vector  
-3. Ending index of the vector. */
 template <typename T>
 vector<T> permutations(T &v)
 {
-    auto result = vector<T>();
-    inner_permutations(v, 0, v.size()-1, result);
+    vector<T> result;
+    auto endingDepth = v.size() - 1;
+    if (endingDepth > 0)
+        inner_permutations(v, 0, endingDepth, result);
     return result;
 }
 
@@ -76,22 +72,20 @@ int main()
     auto result =
         permutations<vector<int>>(v2);
 
-    for_each(result.begin(), result.end(), [](vector<int> &t) {
+    for (auto &t : result)
         printVector<int>(t);
-    });
 
     cout << "recursive permutation string" << endl;
 
     char ca[] = "ABC";
     string str = ca;
 
-   auto result2 = permutations<string>(str);
-   for_each(result2.begin(), result2.end(), [](string &t) {
-       cout << t << endl;
-   });
+    auto result2 = permutations<string>(str);
+    for (auto &t : result2)
+        cout << t << endl;
 
-   delete v;
-   delete vv;
+    delete v;
+    delete vv;
 
-   getchar();
+    getchar();
 }
