@@ -61,6 +61,7 @@
         "typeinfo": "cpp",
         "utility": "cpp",
         "stack": "cpp",
-        "deque": "cpp"
+        "deque": "cpp",
+        "algorithm": "cpp"
     } // 效果比cpptools要好
 }
