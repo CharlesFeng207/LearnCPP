@@ -6,7 +6,7 @@
 using namespace std;
 
 template <class T>
-void printVector(vector<T> vector)
+void printVector(vector<T> &vector)
 {
     cout << "[";
 

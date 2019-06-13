@@ -8,7 +8,7 @@
 using namespace std;
 
 template <class T>
-void printVector(vector<T> vector)
+void printVector(vector<T> &vector)
 {
     cout << "[";
 
@@ -103,7 +103,7 @@ int main()
     for (auto &t : result2)
         cout << t << endl;
     cout << "count: " << result.size() << endl;
-    
+
     delete v;
     getchar();
 }

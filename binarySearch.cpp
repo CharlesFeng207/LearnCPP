@@ -38,7 +38,7 @@ int main()
     for (int i = 0; i < 100000; i++)
         v.push_back(i);
 
-    cout << bineaySearch(v, 100000);
+    cout << bineaySearch(v, 9991);
     
     getchar();
 }

@@ -7,7 +7,7 @@
 using namespace std;
 
 template <class T>
-void printVector(vector<T> vector)
+void printVector(vector<T> &vector)
 {
     cout << "[";
 
@@ -59,6 +59,13 @@ int main()
     stack<int> s;
     s.push(1);
     // printVector(v3);
+
+    cout << "assign(v1.begin(), v1.end());" << endl;
+    vector<int> v4;
+    v4.assign(v1.begin(), v1.begin() + 2);
+    vector<int> v5(v1.begin(), v1.end() - 1);
+    printVector(v4);
+    printVector(v5);
 
     getchar();
 }
