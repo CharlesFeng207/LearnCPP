@@ -4,7 +4,7 @@
 
 using namespace std;
 
-string join(const vector<string> &v, string c)
+string join(vector<string> &v, string c)
 {
     string s;
 
@@ -21,38 +21,48 @@ string join(const vector<string> &v, string c)
 
 int main()
 {
+    cout << "size and sizeof" << endl;
     auto *ps = new string("Memory Management");
-    cout << "size() " << ps->size() << endl;
-    cout << "sizeof() " << sizeof(*ps) << endl;
-
-    cout << "delete" << endl;
+    cout << "size(): " << ps->size() << endl;
+    cout << "sizeof(): " << sizeof(*ps) << endl;
 
     delete ps;
-    cout << "size() " << ps->size() << endl;
-    cout << "sizeof() " << sizeof(*ps) << endl;
+
+    cout << "after delete" << endl;
+    cout << "size(): " << ps->size() << endl;
+    cout << "sizeof(): " << sizeof(*ps) << endl
+         << endl;
 
     string s = "123";
 
     for (int i = 0; i < s.length(); i++)
         cout << s[i] << endl;
 
-    cout << "------------" << endl;
+    cout << "size and length" << endl;
 
     cout << s.size() << endl;
-    cout << s.length() << endl;
+    cout << s.length() << endl
+         << endl;
+
+    cout << "find 32 from string" << endl;
 
     if (s.find("32") == string::npos)
-        cout << "not found" << endl;
+        cout << "not found" << endl
+             << endl;
 
-    cout << s + "xx" << endl;
-
+    cout << "string to int" << endl;
     int t = stoi(s);
-    cout << t << endl;
+    cout << t + 1 << endl;
 
+    cout << "int to string" << endl;
+    cout << to_string(t) + "ABC" << endl
+         << endl;
+
+    cout << "string join" << endl;
     vector<string> v{"Hello, ", " Cruel ", "World!"};
 
     string st;
-    for (const auto &piece : v)
+    for (auto &piece : v)
         st += piece;
 
     cout << st << endl;
