@@ -1,7 +1,8 @@
 // #include <float.h>
 #include <iostream>
 #include <string>
-#include <unistd.h>
+#include <windows.h>
+
 using namespace std;
 
 int main()
@@ -9,14 +10,13 @@ int main()
     float ff = 1.2;
     int a = 1;
 
-    cout << string("Hello") + "World!" << a << " " << ff << endl;
-
     while (true)
     {
         static int i = 0;
         system("cls");
+        cout << string("Hello") + "World!" << a << " " << ff << endl;
         cout << i++ << endl;
-        sleep(0.5f);
+        Sleep(100);
     }
 
     getchar();
