@@ -62,6 +62,7 @@
         "utility": "cpp",
         "stack": "cpp",
         "deque": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "map": "cpp"
     } // 效果比cpptools要好
 }

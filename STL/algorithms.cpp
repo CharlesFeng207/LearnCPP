@@ -26,7 +26,7 @@ void printVector(vector<T> vector)
 
 int main()
 {
-    auto v = new vector<int>{1, 2, 3, 4, 5, 6};
+    auto v = new vector<int>{2, 2, 3, 4, 5, 6};
 
     cout << "swap" << endl;
     swap(*(v->begin()), *(v->end() - 1));
@@ -54,6 +54,20 @@ int main()
 
     cout << "binary_search: 4 (must perform in a sorted vector)" << endl;
     cout << binary_search(v->begin(), v->end(), 4) << endl;
+
+    cout << "any_of > 5" << endl;
+    cout << any_of(v->begin(), v->end(), [](auto &a) {
+        return a > 5;
+    }) << endl;
+
+    cout << "all_of < 7" << endl;
+    cout << all_of(v->begin(), v->end(), [](auto &a) {
+        return a < 7;
+    }) << endl;
+
+    cout << "lower_bound (x > 0)" << endl;
+    auto f = lower_bound(v->begin(), v->end(), 0);
+    cout << *f << endl;
 
     delete v;
     getchar();
