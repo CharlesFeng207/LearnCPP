@@ -67,5 +67,8 @@ int main()
     printVector(v4);
     printVector(v5);
 
+    cout << "vector<vector<int>>(10)" << endl;
+    vector<int> v6(10, 6);
+    printVector(v6);
     getchar();
 }
