@@ -23,72 +23,65 @@ void printVector(vector<T> &vector)
     }
 }
 
-void Qsort(vector<int> &arr, int low, int high)
+void quickSort(vector<int> &a, int startIndex, int endIndex)
 {
-    if (high <= low)
+    if (endIndex <= startIndex)
         return;
-        
-    int i = low;
-    int j = high + 1;
-    int key = arr[low];
+
+    int pivot = a[startIndex];
+    int i = startIndex;
+    int j = endIndex + 1;
+
     while (true)
     {
-        /*从左向右找比key大的值*/
-        while (arr[++i] < key)
+        while (pivot > a[++i] && i < endIndex)
         {
-            if (i == high)
-            {
-                break;
-            }
         }
-        /*从右向左找比key小的值*/
-        while (arr[--j] > key)
+
+        while (pivot < a[--j] && j > startIndex)
         {
-            if (j == low)
-            {
-                break;
-            }
         }
+
         if (i >= j)
             break;
-        /*交换i,j对应的值*/
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+
+        swap(a[i], a[j]);
     }
-    /*中枢值与j对应值交换*/
-    int temp = arr[low];
-    arr[low] = arr[j];
-    arr[j] = temp;
-    Qsort(arr, low, j - 1);
-    Qsort(arr, j + 1, high);
+
+    swap(a[startIndex], a[j]);
+
+    quickSort(a, startIndex, j - 1);
+    quickSort(a, j + 1, endIndex);
 }
+
 void quickSort(vector<int> &a)
 {
+    quickSort(a, 0, a.size() - 1);
 }
 
 void test(vector<int> &a)
 {
     int start = clock();
-    Qsort(a, 0, a.size() - 1);
+    quickSort(a, 0, a.size() - 1);
     cout << clock() - start << endl;
 }
 
 int main()
 {
     vector<int> v;
-    for (int i = 10000; i >= 0; i--)
+    for (int i = 5; i >= 0; i--)
         v.push_back(i);
 
     vector<int> v2;
-    for (int i = 10000; i >= 0; i--)
+    for (int i = 100; i >= 0; i--)
         v2.push_back(rand());
 
-    test(v);
+    // vector<int> v3{3, 4, 1, 2, 5, 0};
+
+    // test(v3);
     test(v2);
 
-    cout << v[0];
-    // printVector<int>(v);
-
+    // cout << v[0] << endl;
+    printVector<int>(v2);
     getchar();
 }
