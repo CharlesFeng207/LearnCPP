@@ -13,11 +13,8 @@ struct Node
     int x, y;
     Node *parent = NULL;
 
-    Node(int x, int y, Node *parent)
+    Node(int x, int y, Node *parent) : x(x), y(y), parent(parent)
     {
-        this->x = x;
-        this->y = y;
-        this->parent = parent;
     }
 };
 
@@ -123,7 +120,6 @@ int NodeFactory::count;
 
 int main()
 {
-
     int n = 8;
     auto t = clock();
     auto result = nQueens(n);
@@ -137,5 +133,6 @@ int main()
     NodeFactory::clear();
 
     Sleep(100);
+
     getchar();
 }
