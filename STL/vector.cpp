@@ -1,4 +1,5 @@
 #include <deque>
+#include <functional>
 #include <iostream>
 #include <stack>
 #include <string>
@@ -7,22 +8,49 @@
 using namespace std;
 
 template <class T>
-void printVector(vector<T> &vector)
+void printVector(vector<T> &v)
 {
     cout << "[";
 
-    int size = vector.size();
+    int size = v.size();
     for (int i = 0; i < size; i++)
     {
         if (i != size - 1)
         {
-            cout << vector[i] << ", ";
+            cout << v[i] << ", ";
         }
         else
         {
-            cout << vector[i] << "]" << endl;
+            cout << v[i] << "]" << endl;
         }
     }
+}
+
+template <class T, class Y>
+vector<Y> select(vector<T> &v, function<Y(T &)> func)
+{
+    vector<Y> t;
+    for (auto &i : v)
+    {
+        t.emplace_back(func(i));
+    }
+
+    return t;
+}
+
+template <class T>
+vector<T> where(vector<T> &v, function<bool(T &)> func)
+{
+    vector<T> t;
+    for (auto &i : v)
+    {
+        if (func(i))
+        {
+            t.emplace_back(i);
+        }
+    }
+
+    return t;
 }
 
 int main()
@@ -70,5 +98,13 @@ int main()
     cout << "vector<vector<int>>(10)" << endl;
     vector<int> v6(10, 6);
     printVector(v6);
+
+    cout << "linq where" << endl;
+    auto v7 = where<int>(v1, [](int &i) { return i > 3; });
+    printVector(v7);
+
+    cout << "linq select" << endl;
+    auto v8 = select<int, string>(v7, [](int &i) { return to_string(i) + "x"; });
+    printVector(v8);
     getchar();
 }

@@ -15,8 +15,8 @@ int main()
     //当map中有这个关键字时，insert操作是插入数据不了的
     m.insert(pair<int, string>(1, "321"));
 
-    // 数组的方式可以
-    // cout << m[0] << endl;
+    // 数组的方式理论上可以，实际上有编译的问题，程序直接关闭
+    // cout << m[1] << endl;
     // m[1] = "321";
 
     auto iter = m.begin();

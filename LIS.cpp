@@ -115,7 +115,7 @@ int lengthOfLIS_DP(vector<int> &nums)
     return bestValue;
 }
 
-// O(n2)
+// O(n^2)
 int lengthOfLIS_Loop(vector<int> &nums)
 {
     int bestValue = 0;
@@ -157,12 +157,12 @@ int main()
 {
     // vector<int> nums = {-2, -1};
     // vector<int> nums = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-    vector<int> nums = {10, 9, 2, 5, 3, 7, 101, 6};
-    // vector<int> nums;
-    // for (int i = 0; i < 10000; i++)
-    // {
-    //     nums.push_back(rand());
-    // }
+    // vector<int> nums = {10, 9, 2, 5, 3, 7, 101, 6};
+    vector<int> nums;
+    for (int i = 0; i < 10000; i++)
+    {
+        nums.push_back(rand());
+    }
 
     auto t = clock();
     cout << "lengthOfLIS_Loop:" << lengthOfLIS_Loop(nums) << " " << clock() - t << endl;
