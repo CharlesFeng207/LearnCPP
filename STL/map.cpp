@@ -16,8 +16,9 @@ int main()
     m.insert(pair<int, string>(1, "321"));
 
     // 数组的方式理论上可以，实际上有编译的问题，程序直接关闭
-    // cout << m[1] << endl;
-    // m[1] = "321";
+    cout << m[1] << endl;
+    m[1] = "321";
+    cout << m[1] << endl;
 
     auto iter = m.begin();
 
@@ -34,4 +35,6 @@ int main()
     }
 
     getchar();
+
+    return 0;
 }
