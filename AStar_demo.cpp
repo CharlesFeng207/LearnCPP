@@ -3,7 +3,7 @@
 #include <iostream>
 #include <list>
 #include <vector>
-#include <windows.h>
+// #include <windows.h>
 
 using namespace std;
 
@@ -41,13 +41,10 @@ vector<vector<int>> AStar::map = {
 
 int main()
 {
-    while (true)
-    {
-        system("cls");
-        auto path = AStar::search(1, 1, 6, 2);
-        printSolution(AStar::map, path);
-        Sleep(100);
-    }
-
+    // system("cls");
+    auto path = AStar::search(1, 1, 6, 2);
+    printSolution(AStar::map, path);
+    // Sleep(100);
     getchar();
+    return 0;
 }
