@@ -67,6 +67,7 @@
         "cstring": "cpp",
         "list": "cpp",
         "functional": "cpp",
-        "memory": "cpp"
+        "memory": "cpp",
+        "unordered_set": "cpp"
     } // 效果比cpptools要好
 }

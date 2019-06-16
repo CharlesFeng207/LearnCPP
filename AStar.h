@@ -2,6 +2,8 @@
 #include <iostream>
 #include <list>
 #include <math.h>
+#include <set>
+#include <unordered_set>
 #include <vector>
 
 using namespace std;
@@ -14,17 +16,26 @@ public:
     float g;
     float h;
     float t;
-    bool isInOpen = false;
-    bool isInClose = false;
+
     Node *parent;
 
     Node(int x, int y, Node *parent = NULL) : x(x), y(y), parent(parent)
     {
     }
 
-    float f()
+    float f() const
     {
         return g + h;
+    }
+};
+
+class NodeSortCriterion
+{
+public:
+    bool
+    operator()(const Node *a, const Node *b) const
+    {
+        return a->f() < b->f();
     }
 };
 
@@ -34,7 +45,7 @@ public:
     static vector<vector<int>> map;
     static list<Node> search(int startX, int startY, int endX, int endY)
     {
-        // Validate map
+        // Validate map.
         int height = map.size();
         if (height == 0)
             return {};
@@ -43,26 +54,25 @@ public:
         if (width == 0)
             return {};
 
-        // Validate input
+        // Validate input.
         if (!checkMap(startX, startY) || !checkMap(endX, endY))
         {
-            cout << "input error" << endl;
+            cout << "input error, startX: " << startX << " startY: " << startY << " endX: " << endX << " endY: " << endY << endl;
             return {};
         }
 
-        // Init start node and open list
+        // Init start node and open list.
         auto start = getNode(startX, startY);
-        start->isInOpen = true;
+        start->g = 0;
 
-        list<Node *> open{start};
+        set<Node *, NodeSortCriterion> openSet{start};
+        unordered_set<Node *> closeSet;
 
-        while (!open.empty())
+        while (openSet.size() != 0)
         {
-            // Find the least cost node, the remove from open list
-            auto cur = getLeastCost(open);
-
-            cur->isInOpen = false;
-            open.remove(cur);
+            // Find the least cost node, then remove from open list.
+            auto cur = *openSet.begin();
+            openSet.erase(cur);
 
             if (cur->x == endX && cur->y == endY)
             {
@@ -71,14 +81,14 @@ public:
             else
             {
                 // Estimating all next nodes.
-                auto nearNodes = getNearNodes(cur->x, cur->y);
+                auto nearNodes = getNearNodes(cur->x, cur->y, closeSet);
 
                 for (auto &n : nearNodes)
                 {
                     float pendingG = cur->g + n->t;
 
-                    // Check if is a better choice
-                    if (n->isInOpen)
+                    // Check if is a better choice.
+                    if (openSet.find(n) != openSet.end())
                     {
                         if (n->g > pendingG)
                         {
@@ -87,22 +97,19 @@ public:
                         }
                         else
                         {
-                            // Ignore
+                            // Ignore.
                         }
                     }
                     else // Setup node and then add to open list.
                     {
-
                         n->g = pendingG;
                         n->parent = cur;
-
                         n->h = calculateH(n->x, n->y, endX, endY);
-                        n->isInOpen = true;
-                        open.push_back(n);
+                        
+                        openSet.insert(n);
                     }
                 }
-
-                cur->isInClose = true;
+                closeSet.insert(cur);
             }
         }
 
@@ -115,7 +122,7 @@ private:
     {
         int dx = startX - endX;
         int dy = startY - endY;
-        return -sqrt(dx * dx + dy * dy);
+        return sqrt(dx * dx + dy * dy);
     }
 
     static bool checkMap(int x, int y)
@@ -123,7 +130,7 @@ private:
         return x >= 0 && x < map[0].size() && y >= 0 && y < map.size() && map[y][x] == 0;
     }
 
-    static vector<Node *> getNearNodes(int x, int y)
+    static vector<Node *> getNearNodes(int x, int y, unordered_set<Node *> &closeSet)
     {
         vector<Node *> t;
         for (int i = y - 1; i <= y + 1; i++)
@@ -137,9 +144,11 @@ private:
 
                 auto n = getNode(j, i);
 
-                if (n->isInClose)
+                // If is in close set.
+                if (closeSet.find(n) != closeSet.end())
                     continue;
 
+                // Check diagonal situation.
                 if (abs(i - y) == abs(j - x))
                 {
                     if (!checkMap(x, i) || !checkMap(j, y))
@@ -147,7 +156,7 @@ private:
                         continue;
                     }
 
-                    n->t = 1.4;
+                    n->t = 1.4; // Diagonal path should cost more.
                 }
                 else
                 {

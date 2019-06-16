@@ -9,6 +9,9 @@ using namespace std;
 
 void printSolution(vector<vector<int>> &maze, list<Node> path)
 {
+    if (path.size() == 0)
+        return;
+
     vector<vector<int>> a = maze;
 
     for (auto &n : path)
@@ -29,18 +32,22 @@ void printSolution(vector<vector<int>> &maze, list<Node> path)
 vector<vector<int>> AStar::map = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1},
-    {1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1},
-    {1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1},
+    {1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1},
+    {1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1},
     {1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
 
 int main()
 {
-
-    auto path = AStar::search(1, 1, 10, 1);
-    printSolution(AStar::map, path);
+    while (true)
+    {
+        system("cls");
+        auto path = AStar::search(1, 1, 6, 2);
+        printSolution(AStar::map, path);
+        Sleep(100);
+    }
 
     getchar();
 }
