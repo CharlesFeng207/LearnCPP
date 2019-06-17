@@ -20,7 +20,9 @@ ListNode *createListNode(int num)
 
     for (int i = 0; i < str.size(); i++)
     {
-        int iv = (int)str[i] - 48; // Char to int, number start from 48 in ascii.
+        // Char to int, number start from 48 in ascii. = stoi(string(1, str[i]));
+        int iv = str[i] - 48;
+
         a[i] = new ListNode(iv);
 
         if (i != 0)
@@ -45,28 +47,28 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
     {
         int tv1 = t1 == NULL ? 0 : t1->val;
         int tv2 = t2 == NULL ? 0 : t2->val;
-        
+
         int t = bonus + tv1 + tv2;
         bonus = t >= 10;
         int tv3 = t % 10;
 
         auto node = new ListNode(tv3);
-        if(result == NULL)
+        if (result == NULL)
         {
             result = node;
         }
 
-        if(pre != NULL)
+        if (pre != NULL)
         {
             pre->next = node;
         }
 
         pre = node;
 
-        if(t1 != NULL)
+        if (t1 != NULL)
             t1 = t1->next;
 
-        if(t2 != NULL)
+        if (t2 != NULL)
             t2 = t2->next;
     }
 
