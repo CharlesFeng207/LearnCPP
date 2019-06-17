@@ -50,8 +50,12 @@ int main()
 
     AStar::init(map);
 
-    auto path = AStar::search(1, 1, 6, 2);
-    printSolution(*AStar::map, path);
+    // while (true)
+    // {
+        auto path = AStar::search(1, 1, 6, 2);
+        printSolution(*AStar::map, path);
+    // }
+    
     // Sleep(100);
     getchar();
     return 0;

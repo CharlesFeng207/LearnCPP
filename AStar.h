@@ -11,8 +11,6 @@ using namespace std;
 #define COST 1
 #define DIAGONAL_COST 1.4
 
-
-
 struct Node
 {
 public:
@@ -58,10 +56,10 @@ public:
         AStar::mapHeight = AStar::map->size();
         AStar::mapWidth = (*AStar::map)[0].size();
 
-        if( AStar::mapHeight == 0 ||  AStar::mapWidth == 0)
+        if (AStar::mapHeight == 0 || AStar::mapWidth == 0)
         {
-             cout << "error map" << endl;
-             return;
+            cout << "error map" << endl;
+            return;
         }
         if (AStar::allNodes != (vector<vector<Node *>> *)NULL)
         {
@@ -73,11 +71,11 @@ public:
 
     static list<Node> search(int startX, int startY, int endX, int endY)
     {
-       if(AStar::allNodes == (vector<vector<Node *>> *) NULL)
-       {
-           cout << "init AStar first" << endl;
-           return {};
-       }
+        if (AStar::allNodes == (vector<vector<Node *>> *)NULL)
+        {
+            cout << "init AStar first" << endl;
+            return {};
+        }
 
         // Validate input.
         if (!checkMap(startX, startY) || !checkMap(endX, endY))
@@ -198,7 +196,7 @@ private:
     static Node *getNode(int x, int y)
     {
         auto &t = (*AStar::allNodes)[y][x];
-        if(t == (Node *) NULL)
+        if (t == (Node *)NULL)
         {
             t = new Node(x, y);
         }
