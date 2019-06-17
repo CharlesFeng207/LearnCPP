@@ -29,21 +29,29 @@ void printSolution(vector<vector<int>> &maze, list<Node> path)
     }
 }
 
-vector<vector<int>> AStar::map = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1},
-    {1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1},
-    {1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1},
-    {1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+auto AStar::mapWidth = 0;
+auto AStar::mapHeight = 0;
+auto AStar::map = (vector<vector<int>> *)NULL;
+auto AStar::allNodes = (vector<vector<Node *>> *)NULL;
 
 int main()
 {
     // system("cls");
+
+    auto map = new vector<vector<int>>{
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+        {1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1},
+        {1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1},
+        {1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1},
+        {1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1},
+        {1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+        {1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+        {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+
+    AStar::init(map);
+
     auto path = AStar::search(1, 1, 6, 2);
-    printSolution(AStar::map, path);
+    printSolution(*AStar::map, path);
     // Sleep(100);
     getchar();
     return 0;

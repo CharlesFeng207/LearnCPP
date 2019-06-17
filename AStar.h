@@ -45,15 +45,40 @@ public:
 class AStar
 {
 public:
-    static vector<vector<int>> map;
+    static int mapWidth;
+    static int mapHeight;
+    static vector<vector<int>> *map;
+    static vector<vector<Node *>> *allNodes;
+
+    static void init(vector<vector<int>> *map)
+    {
+        AStar::map = map;
+
+        if(AStar::allNodes != (vector<vector<Node*>> *) NULL)
+        {
+            delete AStar::allNodes;
+        }
+
+         AStar::mapHeight = AStar::map->size();
+         AStar::mapWidth = (*AStar::map)[0].size();
+         
+        AStar::allNodes = new vector<vector<Node *>>(mapHeight, vector<Node *>(mapWidth, (Node *)NULL));
+    }
+
     static list<Node> search(int startX, int startY, int endX, int endY)
     {
+       if(AStar::allNodes == (vector<vector<Node *>> *) NULL)
+       {
+           cout << "init AStar first" << endl;
+           return {};
+       }
+
         // Validate map.
-        int height = map.size();
+        int height = AStar::map->size();
         if (height == 0)
             return {};
 
-        int width = map[0].size();
+        int width = (*AStar::map)[0].size();
         if (width == 0)
             return {};
 
@@ -108,7 +133,7 @@ public:
                         n->g = pendingG;
                         n->parent = cur;
                         n->h = calculateH(n->x, n->y, endX, endY);
-                        
+
                         openSet.insert(n);
                     }
                 }
@@ -130,7 +155,7 @@ private:
 
     static bool checkMap(int x, int y)
     {
-        return x >= 0 && x < map[0].size() && y >= 0 && y < map.size() && map[y][x] == 0;
+        return x >= 0 && x < (*AStar::map)[0].size() && y >= 0 && y < AStar::map->size() && (*AStar::map)[y][x] == 0;
     }
 
     static vector<Node *> getNearNodes(int x, int y, unordered_set<Node *> &closeSet)
@@ -175,14 +200,11 @@ private:
 
     static Node *getNode(int x, int y)
     {
-        static vector<vector<Node *>> allNodes(map.size(), vector<Node *>(map[0].size(), (Node *)NULL));
-
-        auto &t = allNodes[y][x];
-        if (t == NULL)
+        auto &t = (*AStar::allNodes)[y][x];
+        if(t == (Node *) NULL)
         {
             t = new Node(x, y);
         }
-
         return t;
     }
 
@@ -199,4 +221,4 @@ private:
 
         return result;
     }
-};
+};        
