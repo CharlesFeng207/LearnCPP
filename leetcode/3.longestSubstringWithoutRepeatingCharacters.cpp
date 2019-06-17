@@ -12,7 +12,7 @@ int lengthOfLongestSubstring(string s)
         return s.size();
 
     // unordered_map<char, int> map; // Char -> index
-    vector<int> map(200, -1); // Key to beat 99% of C++ solutions.
+    vector<int> map(200, -1); // vector is the key to beat 99% of C++ solutions but not robust.
 
     int curLen = 0;
     int maxLen = 0;

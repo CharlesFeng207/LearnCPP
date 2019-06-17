@@ -71,4 +71,6 @@ int main()
     printVector<int>(t);
 
     getchar();
+
+    return 0;
 }
