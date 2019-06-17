@@ -8,6 +8,9 @@
 
 using namespace std;
 
+#define COST 1
+#define DIAGONAL_COST 1.4
+
 struct Node
 {
 public:
@@ -156,11 +159,11 @@ private:
                         continue;
                     }
 
-                    n->t = 1.4; // Diagonal path should cost more.
+                    n->t = DIAGONAL_COST; // Diagonal path should cost more.
                 }
                 else
                 {
-                    n->t = 1;
+                    n->t = COST;
                 }
 
                 t.push_back(n);
@@ -181,22 +184,6 @@ private:
         }
 
         return t;
-    }
-
-    static Node *getLeastCost(list<Node *> &openList)
-    {
-        if (!openList.empty())
-        {
-            auto result = openList.front();
-
-            for (auto &n : openList)
-                if (n->f() < result->f())
-                    result = n;
-
-            return result;
-        }
-
-        return (Node *)NULL;
     }
 
     static list<Node> buildPath(Node *endNode)
