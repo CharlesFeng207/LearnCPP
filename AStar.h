@@ -11,6 +11,8 @@ using namespace std;
 #define COST 1
 #define DIAGONAL_COST 1.4
 
+
+
 struct Node
 {
 public:
@@ -53,15 +55,19 @@ public:
     static void init(vector<vector<int>> *map)
     {
         AStar::map = map;
+        AStar::mapHeight = AStar::map->size();
+        AStar::mapWidth = (*AStar::map)[0].size();
 
-        if(AStar::allNodes != (vector<vector<Node*>> *) NULL)
+        if( AStar::mapHeight == 0 ||  AStar::mapWidth == 0)
+        {
+             cout << "error map" << endl;
+             return;
+        }
+        if (AStar::allNodes != (vector<vector<Node *>> *)NULL)
         {
             delete AStar::allNodes;
         }
 
-         AStar::mapHeight = AStar::map->size();
-         AStar::mapWidth = (*AStar::map)[0].size();
-         
         AStar::allNodes = new vector<vector<Node *>>(mapHeight, vector<Node *>(mapWidth, (Node *)NULL));
     }
 
@@ -72,15 +78,6 @@ public:
            cout << "init AStar first" << endl;
            return {};
        }
-
-        // Validate map.
-        int height = AStar::map->size();
-        if (height == 0)
-            return {};
-
-        int width = (*AStar::map)[0].size();
-        if (width == 0)
-            return {};
 
         // Validate input.
         if (!checkMap(startX, startY) || !checkMap(endX, endY))
@@ -155,7 +152,7 @@ private:
 
     static bool checkMap(int x, int y)
     {
-        return x >= 0 && x < (*AStar::map)[0].size() && y >= 0 && y < AStar::map->size() && (*AStar::map)[y][x] == 0;
+        return x >= 0 && x < AStar::mapWidth && y >= 0 && y < AStar::mapHeight && (*AStar::map)[y][x] == 0;
     }
 
     static vector<Node *> getNearNodes(int x, int y, unordered_set<Node *> &closeSet)
@@ -221,4 +218,4 @@ private:
 
         return result;
     }
-};        
+};
