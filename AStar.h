@@ -216,4 +216,9 @@ private:
 
         return result;
     }
-};
+};  
+
+auto AStar::mapWidth = 0;
+auto AStar::mapHeight = 0;
+auto AStar::map = (vector<vector<int>> *)NULL;
+auto AStar::allNodes = (vector<vector<Node *>> *)NULL;

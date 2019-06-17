@@ -29,11 +29,6 @@ void printSolution(vector<vector<int>> &maze, list<Node> path)
     }
 }
 
-auto AStar::mapWidth = 0;
-auto AStar::mapHeight = 0;
-auto AStar::map = (vector<vector<int>> *)NULL;
-auto AStar::allNodes = (vector<vector<Node *>> *)NULL;
-
 int main()
 {
     // system("cls");
