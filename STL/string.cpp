@@ -70,4 +70,6 @@ int main()
     cout << join(v, "^") << endl;
 
     getchar();
+
+    return 0;
 }
