@@ -16,7 +16,7 @@ vector<int> KMP_pre_loop(string &t)
             j = 0;
         }
 
-        if (t[i] == t[j])
+        if (t[i] == t[j]) 
         {
             j++;
         }
