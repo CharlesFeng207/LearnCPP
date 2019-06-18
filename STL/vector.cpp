@@ -157,6 +157,9 @@ int main()
     auto v8 = select<int, string>(v7, [](int &i) { return to_string(i) + "x"; });
     printVector(v8);
 
+    // ==989==ERROR: AddressSanitizer: heap-buffer-overflow
+    // cout << v8[-1] << endl;
+    cout << v8[2] << endl;
     getchar();
 
     return 0;
