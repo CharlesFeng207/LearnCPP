@@ -61,6 +61,31 @@ vector<int> KMP_pre_DP(string &t)
     return f;
 }
 
+// Algorithm complexity O(n)
+bool KMP(string &s, string &t)
+{
+    int size = s.size() - t.size();
+    auto f = KMP_pre_DP(t);
+
+    for (int i = 0; i < size;)
+    {
+        for (int j = 0; j < t.size(); j++)
+        {
+            if (s[i + j] != t[j])
+            {
+                int step = j == 0 ? 1 : j - f[j - 1] + 1;
+                i += step;
+                break;
+            }
+
+            if (j == t.size() - 1)
+                return true;
+        }
+    }
+
+    return false;
+}
+
 // Algorithm complexity O(n*m)
 bool bruteforce(string &s, string &t)
 {
@@ -96,7 +121,7 @@ void test_case(string s, int n, string target)
     }
 
     int t = clock();
-    auto iter = s.find(target);
+    auto iter = str.find(target);
     if (iter == string::npos)
     {
         cout << "STL not found" << endl;
@@ -119,13 +144,28 @@ void test_case(string s, int n, string target)
     }
 
     cout << "bruteforce: " << clock() - t << " ms" << endl;
+
+    t = clock();
+    if (!KMP(str, target))
+    {
+        cout << "KMP not found" << endl;
+    }
+    else
+    {
+        cout << "KMP found" << endl;
+    }
+
+    cout << "KMP: " << clock() - t << " ms" << endl;
+
+    cout << "end" << endl;
 }
+
+// string s("ABCDABD");
+// string s("abcabcab");
+string s("abcddfkjg#mnsmgksdab");
 
 void test_kmp_pre()
 {
-    // string s("ABCDABD");
-    string s("abcabcab");
-
     cout << "KMP_pre_loop" << endl;
     auto v = KMP_pre_loop(s);
 
@@ -146,8 +186,8 @@ int main()
 {
     test_kmp_pre();
 
-    test_case("abcddfkjgmnsmgksdmf", 1000000, "abcddfkjg#mnsmgksdmf");
-
+    test_case("abcddfkjgmnsmgksdmf", 10000000, s);
+    // test_case("abcddfkjgmnsmgksdmf", 10000000, "abcddfkjgmnsmgksdmfa");
     getchar();
 
     return 0;
