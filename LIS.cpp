@@ -82,59 +82,28 @@ int lengthOfLIS_Combinations(vector<int> &nums)
     return 0;
 }
 
-// Dynamic programming
-int lengthOfLIS_DP(vector<int> &nums, int index, vector<int> &cache)
+// DP O(n^2)
+int lengthOfLIS_DP(vector<int> &nums)
 {
-    if (cache[index] == 0)
+    int maxLen = 0;
+    vector<int> dp(nums.size(), 0);
+
+    for (int i = 0; i < nums.size(); i++)
     {
-        int bestChildValue = 0;
-        for (int i = 0; i < index; i++)
+        int t = 1;
+        for (int j = 0; j < i; j++)
         {
-            if (nums[i] < nums[index])
+            if (nums[j] < nums[i])
             {
-                bestChildValue = max(bestChildValue, lengthOfLIS_DP(nums, i, cache));
+                t = max(t, 1 + dp[j]);
             }
         }
 
-        cache[index] = 1 + bestChildValue;
+        dp[i] = t;
+        maxLen = max(maxLen, dp[i]);
     }
 
-    return cache[index];
-}
-
-int lengthOfLIS_DP(vector<int> &nums)
-{
-    int bestValue = 0;
-    vector<int> cache(nums.size());
-
-    for (int i = 0; i < nums.size(); i++)
-    {
-        bestValue = max(lengthOfLIS_DP(nums, i, cache), bestValue);
-    }
-
-    return bestValue;
-}
-
-// O(n^2)
-int lengthOfLIS_Loop(vector<int> &nums)
-{
-    int bestValue = 0;
-    vector<int> lengthOfLISEndAtI(nums.size(), 1);
-
-    for (int i = 0; i < nums.size(); i++)
-    {
-        for (int j = 0; j < i; j++)
-        {
-            if (nums[j] >= nums[i])
-                continue;
-
-            lengthOfLISEndAtI[i] = max(lengthOfLISEndAtI[i], lengthOfLISEndAtI[j] + 1);
-        }
-
-        bestValue = max(bestValue, lengthOfLISEndAtI[i]);
-    }
-
-    return bestValue;
+    return maxLen;
 }
 
 // O(nlogn)
@@ -144,7 +113,7 @@ int lengthOfLIS_Concise(vector<int> &nums)
     for (int i : nums)
     {
         auto it = lower_bound(helper.begin(), helper.end(), i);
-        
+
         if (it == helper.end())
             helper.push_back(i);
         else
@@ -163,9 +132,6 @@ int main()
     {
         nums.push_back(rand());
     }
-
-    auto t = clock();
-    cout << "lengthOfLIS_Loop:" << lengthOfLIS_Loop(nums) << " " << clock() - t << endl;
 
     auto t4 = clock();
     cout << "lengthOfLIS_Concise:" << lengthOfLIS_Concise(nums) << " " << clock() - t4 << endl;

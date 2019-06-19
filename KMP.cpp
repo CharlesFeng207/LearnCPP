@@ -5,28 +5,6 @@
 
 using namespace std;
 
-vector<int> KMP_pre_loop(string &t)
-{
-    vector<int> f(t.size(), 0);
-
-    for (int i = 1, j = 0; i < t.size(); i++)
-    {
-        if (j != 0 && t[i] != t[j])
-        {
-            j = 0;
-        }
-
-        if (t[i] == t[j]) 
-        {
-            j++;
-        }
-
-        f[i] = j;
-    }
-
-    return f;
-}
-
 int KMP_pre_DP_inner(string &t, vector<int> &f, int n)
 {
     if (f[n] != -1)
