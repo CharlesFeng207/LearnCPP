@@ -31,6 +31,28 @@ int maxSum(vector<vector<int>> &a, int rowIndex, int colIndex)
     }
 }
 
+int maxSum_dp(vector<vector<int>> &a, int rowIndex, int colIndex)
+{
+    vector<vector<int>> dp(a.size(), vector<int>(a.size(), 0));
+
+    for (int i = a.size() - 1; i >= 0; i--)
+    {
+        for (int j = 0; j <= i; j++)
+        {
+            if (i == a.size() - 1)
+            {
+                dp[i][j] = a[i][j];
+            }
+            else
+            {
+                dp[i][j] = max(dp[i + 1][j], dp[i + 1][j + 1]) + a[i][j];
+            }
+        }
+    }
+
+    return dp[rowIndex][colIndex];
+}
+
 int main()
 {
     // Create numeric triangle
@@ -57,6 +79,7 @@ int main()
     }
 
     cout << "maxSum:" << maxSum(a, 0, 0) << endl;
-    
+    cout << "maxSum_dp:" << maxSum_dp(a, 0, 0) << endl;
+
     getchar();
 }
