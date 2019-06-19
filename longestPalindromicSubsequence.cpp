@@ -10,8 +10,6 @@ using namespace std;
 int count_LPS_inner_str = 0;
 string LPS_inner_str(string &s, int start, int end, vector<vector<string>> &P)
 {
-    count_LPS_inner_str++;
-
     if (start == end)
         return string(1, s[start]);
 
@@ -20,6 +18,8 @@ string LPS_inner_str(string &s, int start, int end, vector<vector<string>> &P)
 
     if (P[start][end] == "")
     {
+        count_LPS_inner_str++;
+
         if (s[start] == s[end])
         {
             P[start][end] = string(1, s[start]) + LPS_inner_str(s, start + 1, end - 1, P) + string(1, s[end]);
@@ -89,7 +89,7 @@ int main()
     cout << LPS(s) << endl;
 
     cout << "call count: " << count_LPS_inner_str << endl;
-    
+
     getchar();
     return 0;
 }
