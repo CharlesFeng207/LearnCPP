@@ -18,21 +18,13 @@ int maxSubArray_DP(vector<int> &nums)
     if (nums.size() == 1)
         return nums[0];
 
-    vector<int> P(nums.size(), 0);
+    vector<int> dp(nums.size(), 0);
 
     int maxSum = nums[0];
-    for (int i = 0; i < nums.size(); i++)
+    for (int i = 1; i < nums.size(); i++)
     {
-        if (i == 0)
-        {
-            P[0] = nums[0];
-        }
-        else
-        {
-            P[i] = nums[i] + max(P[i - 1], 0);
-        }
-
-        maxSum = max(maxSum, P[i]);
+        dp[i] = max(dp[i - 1], 0) + nums[i];
+        maxSum = max(maxSum, dp[i]);
     }
 
     return maxSum;

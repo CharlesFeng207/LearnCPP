@@ -5,38 +5,24 @@
 
 using namespace std;
 
-int KMP_pre_DP_inner(string &t, vector<int> &f, int n)
-{
-    if (f[n] != -1)
-    {
-        return f[n];
-    }
-
-    if (n == 0)
-    {
-        f[n] = 0;
-    }
-    else
-    {
-        int pre = KMP_pre_DP_inner(t, f, n - 1);
-        if (t[pre] == t[n])
-        {
-            f[n] = pre + 1;
-        }
-        else
-        {
-            f[n] = 0;
-        }
-    }
-
-    return f[n];
-}
 
 vector<int> KMP_pre_DP(string &t)
 {
-    vector<int> f(t.size(), -1);
-    KMP_pre_DP_inner(t, f, t.size() - 1);
-    return f;
+    vector<int> dp(t.size(), 0);
+    for (int i = 1; i < t.size(); i++)
+    {
+        int pre = dp[i - 1];
+        if (t[i] == t[pre])
+        {
+            dp[i] = pre + 1;
+        }
+        else
+        {
+            dp[i] = 0;
+        }
+    }
+
+    return dp;
 }
 
 // Algorithm complexity O(n)
@@ -140,19 +126,15 @@ void test_case(string s, int n, string target)
 
 // string s("ABCDABD");
 // string s("abcabcab");
-string s("abcddfkjg#mnsmgksdab");
+string s("kjgmns");
 
 void test_kmp_pre()
 {
-    cout << "KMP_pre_loop" << endl;
-    auto v = KMP_pre_loop(s);
-
-    for (auto &i : v)
-        cout << i << " ";
 
     cout << endl
          << "KMP_pre_DP" << endl;
-    v = KMP_pre_DP(s);
+
+    auto v = KMP_pre_DP(s);
 
     for (auto &i : v)
         cout << i << " ";
