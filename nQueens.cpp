@@ -120,7 +120,7 @@ int NodeFactory::count;
 
 int main()
 {
-    int n = 8;
+    int n = 4;
     auto t = clock();
     auto result = nQueens(n);
     cout << "size: " << result.size() << " time: " << clock() - t << endl;

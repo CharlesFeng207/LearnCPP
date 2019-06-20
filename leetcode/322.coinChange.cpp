@@ -35,51 +35,24 @@ int coinChange_dp(vector<int> &coins, int amount)
     if (amount <= 0)
         return 0;
 
-    vector<int> dp(amount + 1, -1);
-
-    int coinCount = 0;
-    for (auto &c : coins)
-    {
-        if (c <= amount)
-        {
-            dp[c] = 1;
-            coinCount++;
-        }
-    }
-
-    if (coinCount == 0)
+    if (coins.size() == 0)
         return -1;
 
+    vector<int> dp(amount + 1, amount + 1);
     dp[0] = 0;
 
     for (int i = 1; i <= amount; i++)
     {
-        int t = -1;
-
-        for (int j = 0; j < i; j++)
+        for (auto &coin : coins)
         {
-            auto &a = dp[j];
-            auto &b = dp[i - j];
-
-            if (a == -1 || b == -1)
+            if (coin > i)
                 continue;
 
-            int len = a + b;
-
-            if (t == -1)
-            {
-                t = len;
-            }
-            else
-            {
-                t = min(t, len);
-            }
+            dp[i] = min(dp[i], dp[i - coin] + 1); // when i == coin, dp[coin] == 1
         }
-
-        dp[i] = t;
     }
 
-    return dp[amount];
+    return dp[amount] > amount ? -1 : dp[amount];
 }
 
 void test_case(vector<int> &coins, int amount)
@@ -112,6 +85,9 @@ int main()
 
     vector<int> a6{436, 83, 210, 75, 286};
     test_case(a6, 3165);
+
+    vector<int> a7{474, 83, 404, 3};
+    test_case(a7, 264);
 
     getchar();
 
