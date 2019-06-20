@@ -61,5 +61,6 @@ int main()
     cout << maxSubArray_Fast(a) << endl;
 
     getchar();
+    
     return 0;
 }

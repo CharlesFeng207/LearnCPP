@@ -69,6 +69,10 @@ int main()
     auto f = lower_bound(v->begin(), v->end(), 0);
     cout << *f << endl;
 
+    cout << "max_element" << endl;
+    auto maxValue = max_element(v->begin(), v->end());
+    cout << *maxValue << endl;
+
     delete v;
     getchar();
 }
