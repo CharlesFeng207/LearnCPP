@@ -70,6 +70,8 @@
         "memory": "cpp",
         "unordered_set": "cpp",
         "__hash_table": "cpp",
-        "__config": "cpp"
+        "__config": "cpp",
+        "ctime": "cpp",
+        "iomanip": "cpp"
     } // 效果比cpptools要好
 }
