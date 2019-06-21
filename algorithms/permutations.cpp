@@ -35,7 +35,7 @@ void inner_permutations(T &v, int currentDepth, int endingDepth, vector<T> &resu
         for (auto i = currentDepth; i <= endingDepth; i++)
         {
             swap(v[currentDepth], v[i]);
-
+    
             inner_permutations(v, currentDepth + 1, endingDepth, result);
 
             swap(v[currentDepth], v[i]); //backtrack
@@ -47,6 +47,15 @@ template <typename T>
 vector<T> permutations(T &v)
 {
     vector<T> result;
+    if (v.size() < 2)
+    {
+        if (v.size() == 1)
+        {
+            result.push_back(v);
+        }
+        return result;
+    }
+
     auto endingDepth = v.size() - 1;
     if (endingDepth > 0)
         inner_permutations(v, 0, endingDepth, result);
@@ -57,7 +66,7 @@ int main()
 {
     cout << "next_permutation (must perform in a sorted vector)" << endl;
 
-    auto vv = new vector<int>{1, 2, 3};
+    auto vv = new vector<int>{1, 2};
     auto v = new vector<int>(*vv);
 
     do

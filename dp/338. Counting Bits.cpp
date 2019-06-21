@@ -12,6 +12,12 @@ using namespace std;
 
 vector<int> countBits(int num)
 {
+    int c; // c 用来保存结果
+
+    for (c = 0; num; num >>= 1)
+    {
+        c += num & 1;
+    }
 }
 
 int main()
