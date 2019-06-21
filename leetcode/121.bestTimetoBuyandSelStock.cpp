@@ -33,12 +33,12 @@ int maxProfit_fast(vector<int> &prices)
         return 0;
 
     int profit = 0;
-    int minPrirce = prices[0];
+    int minPrice = prices[0];
     
     for (int i = 1; i < prices.size(); i++)
     {
-        minPrirce = min(minPrirce, prices[i]);
-        profit = max(prices[i] - minPrirce, profit);
+        minPrice = min(minPrice, prices[i]);
+        profit = max(prices[i] - minPrice, profit);
     }
 
     return profit;
