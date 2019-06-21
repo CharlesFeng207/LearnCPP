@@ -8,66 +8,97 @@
 
 using namespace std;
 
+template <class T>
+void printVector(vector<T> &v)
+{
+    cout << "[";
+
+    int size = v.size();
+    for (int i = 0; i < size; i++)
+    {
+        if (i != size - 1)
+        {
+            cout << v[i] << ", ";
+        }
+        else
+        {
+            cout << v[i] << "]" << endl;
+        }
+    }
+}
+
+// O(n^2)
+int bruteforce(vector<int> &nums)
+{
+    if (nums.size() == 0)
+        return 0;
+
+    int result = INT_MIN;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        int t = 1;
+        for (int j = i; j >= 0; j--)
+        {
+            t *= nums[j];
+            result = max(t, result);
+        }
+    }
+
+    return result;
+}
+
 // O(n)
 int maxProduct_dp(vector<int> &nums)
 {
     if (nums.size() == 0)
         return 0;
 
-    vector<int> dp(nums.size(), 0);
-    dp[0] = nums[0];
+    vector<int> dp_max(nums.size(), 0);
+    vector<int> dp_min(nums.size(), 0);
+
+    dp_max[0] = nums[0];
+    dp_min[0] = nums[0];
+    int result = nums[0];
 
     for (int i = 1; i < nums.size(); i++)
     {
-        dp[i] = dp[i - 1];
-        int t = 1;
-        for (int j = i; j >= 0; j--)
-        {
-            t *= nums[j];
-            dp[i] = max(dp[i], t);
-        }
+        int num = nums[i];
+        dp_max[i] = max(max(dp_max[i - 1] * num, dp_min[i - 1] * num), num);
+        dp_min[i] = min(min(dp_max[i - 1] * num, dp_min[i - 1] * num), num);
+
+        result = max(result, dp_max[i]);
     }
 
-    return dp.back();
+    return result;
 }
 
-// O(n)
-int maxProduct_fast(vector<int> &nums)
+void test_case(vector<int> &nums)
 {
-    int frontProduct = 1;
-    int backProduct = 1;
-    int ans = INT_MIN;
-    for (int i = 0; i < nums.size(); ++i)
-    {
-        frontProduct *= nums[i];
-        backProduct *= nums[nums.size() - i - 1];
-        ans = max(ans, max(frontProduct, backProduct));
-        frontProduct = frontProduct == 0 ? 1 : frontProduct;
-        backProduct = backProduct == 0 ? 1 : backProduct;
-    }
-    return ans;
+    printVector<int>(nums);
+    int t = clock();
+    cout << "maxProduct_dp " << maxProduct_dp(nums) << " cost " << clock() - t << endl;
+    t = clock();
+    cout << "bruteforce " << bruteforce(nums) << " cost " << clock() - t << endl;
+    cout << endl;
+    cout << endl;
 }
 
 int main()
 {
     vector<int> a{2, 3, -2, 4};
-    cout << maxProduct_fast(a) << endl;
-    cout << maxProduct_dp(a) << endl;
+    test_case(a);
 
-    cout << endl;
     vector<int> a2{-2, 0, -1};
-    cout << maxProduct_fast(a2) << endl;
-    cout << maxProduct_dp(a2) << endl;
+    test_case(a2);
 
-    cout << endl;
     vector<int> a3{-2};
-    cout << maxProduct_fast(a3) << endl;
-    cout << maxProduct_dp(a3) << endl;
+    test_case(a3);
 
-    cout << endl;
     vector<int> a4{-5, 2, 4, 1, -2, 2, -6, 3, -1, -1, -1, -2, -3, 5, 1, -3, -4, 2, -4, 6, -1, 5, -6, -1, -1, -1, -1};
-    cout << maxProduct_fast(a4) << endl;
-    cout << maxProduct_dp(a4) << endl;
+    test_case(a4);
+
+    vector<int> a5{3, -1, 4};
+    test_case(a5);
 
     getchar();
 
