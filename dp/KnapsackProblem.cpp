@@ -23,6 +23,7 @@ void print_dp(vector<vector<int>> &dp)
         }
         cout << endl;
     }
+    cout << endl;
 }
 
 int knapsack(vector<int> &prices, vector<int> &weight, int n, int w)
