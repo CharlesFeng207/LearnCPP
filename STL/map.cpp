@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <map>
 #include <string>
@@ -15,24 +16,31 @@ int main()
     //当map中有这个关键字时，insert操作是插入数据不了的
     m.insert(pair<int, string>(1, "321"));
 
-    // 数组的方式理论上可以，但经测试，在mac环境可以，win不行
+    // 数组的方式理论上可以，但win的clang环境下不行
     cout << m[1] << endl;
     m[1] = "321";
     cout << m[1] << endl;
     m[2] = "3212";
     cout << m[2] << endl;
-        
-    auto iter = m.begin();
+    cout << "m[3]:" << m[3] << endl;
 
+    auto iter = m.begin();
     while (iter != m.end())
     {
         cout << iter->first << ':' << iter->second << endl;
         iter++;
     }
 
+    string str = "lamda";
+    for_each(m.begin(), m.end(), [&str](auto &a) {
+        cout << str << endl;
+        cout << a.first << ":" << a.second << endl;
+    });
+
     iter = m.find(1);
     if (iter != m.end())
     {
+        iter->second += "add";
         cout << iter->second << endl;
     }
 
