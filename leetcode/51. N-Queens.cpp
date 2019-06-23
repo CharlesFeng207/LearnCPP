@@ -21,8 +21,6 @@ struct Node
     }
 };
 
-
-
 bool checkPos(Node *n, int x, int y)
 {
     auto t = n;

@@ -5,7 +5,6 @@
 
 using namespace std;
 
-
 vector<int> KMP_pre_DP(string &t)
 {
     vector<int> dp(t.size(), 0);
