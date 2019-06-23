@@ -72,6 +72,7 @@
         "__hash_table": "cpp",
         "__config": "cpp",
         "ctime": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "numeric": "cpp"
     } // 效果比cpptools要好
 }
