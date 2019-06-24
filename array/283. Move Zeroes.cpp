@@ -64,12 +64,14 @@ void moveZeroes_in_place(vector<int> &nums)
     if (nums.size() == 0)
         return;
 
-    for (int i = 0, j = 0; i < nums.size(); ++i)
+    // two pointers, j is the fast runner.
+    int i = 0;
+    for (int j = 1; j < nums.size(); j++)
     {
-        if (nums[i] != 0)
+        if (nums[j] != 0)
         {
-            swap(nums[i], nums[j]);
-            j++;
+            swap(nums[j], nums[i]);
+            i++;
         }
     }
 }
