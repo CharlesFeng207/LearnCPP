@@ -160,7 +160,12 @@ int main()
     // ==989==ERROR: AddressSanitizer: heap-buffer-overflow
     // cout << v8[-1] << endl;
     cout << v8[2] << endl;
+
+    int aa[2]{1, 2};
+
     getchar();
+
+
 
     return 0;
 }
