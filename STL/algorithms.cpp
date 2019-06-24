@@ -46,7 +46,7 @@ int main()
     printVector<int>(*v);
 
     cout << "sort + lamda" << endl;
-    sort(v->begin(), v->end(), [](int &a, int &b) { return a < b; });
+    sort(v->begin(), v->end(), [](int &a, int &b) { return a < b; }); // return false means need to swap a b
     printVector<int>(*v);
     random_shuffle(v->begin(), v->end());
     sort(v->begin(), v->end());
