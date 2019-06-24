@@ -30,11 +30,24 @@ int maxProfit_dp(vector<int> &prices)
     return dp_sell.back();
 }
 
+int maxProfit(vector<int> &prices)
+{
+    if (prices.size() == 0)
+        return 0;
+
+    int ret = 0;
+    for (int i = 1; i < prices.size(); ++i)
+        ret += max(prices[i] - prices[i - 1], 0);
+        
+    return ret;
+}
+
 int main()
 {
     // vector<int> a{7, 1, 5, 3, 6, 4, 0, 1, 9};
     vector<int> a{7, 1, 5, 3, 6, 4};
     cout << maxProfit_dp(a) << endl;
+    cout << maxProfit(a) << endl;
     getchar();
     return 0;
 }
