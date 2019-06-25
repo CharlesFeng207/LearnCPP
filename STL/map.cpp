@@ -3,8 +3,15 @@
 #include <map>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 using namespace std;
+
+template <class T, class Y>
+unordered_map<T, Y> to_unordered_map(vector<T> v, )
+{
+    
+}
 
 int main()
 {
@@ -47,6 +54,10 @@ int main()
         iter->second += "add";
         cout << iter->second << endl;
     }
+
+    vector<int> v{1, 2, 3, 4, 5};
+    unordered_map<int, int> m2();
+
 
     getchar();
 

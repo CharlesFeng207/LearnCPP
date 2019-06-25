@@ -78,11 +78,10 @@ int majorityElement_dp_like(vector<int> &nums)
 
 int main()
 {
-    vector<int> a{3, 2, 3};
+    vector<int> a{3, 3, 3, 4, 4, 4, 3, 3, 2};
     cout << majorityElement(a) << endl;
 
-    vector<int> a2{3, 2, 3};
-    cout << majorityElement_dp_like(a2) << endl;
+    cout << majorityElement_dp_like(a) << endl;
 
     getchar();
     return 0;

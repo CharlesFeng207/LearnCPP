@@ -58,8 +58,7 @@ vector<int> twoSum_Fast(vector<int> &nums, int target)
         else
         {
             int mate = target - nums[i];
-
-            map.insert(pair<int, int>(mate, i));
+            map[mate] = i;
         }
     }
 
