@@ -34,7 +34,7 @@ struct Node
     }
 };
 
-template <class T>
+template <typename T>
 void printVector(vector<T> &v)
 {
     cout << "[";
@@ -159,13 +159,9 @@ int main()
 
     // ==989==ERROR: AddressSanitizer: heap-buffer-overflow
     // cout << v8[-1] << endl;
-    cout << v8[2] << endl;
-
-    int aa[2]{1, 2};
+    // cout << v8[2] << endl;
 
     getchar();
-
-
 
     return 0;
 }
