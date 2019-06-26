@@ -29,28 +29,39 @@ void printVector(vector<T> &vector)
     }
 }
 
+/*
+index	[0]	[1]	[2]	[3]	[4]	[5]	[6]
+value	 2	 6	 4	 1	 3	 1	 5
+linked list with cycle:
+index	[0]	[2]	[4]	[3]	[1]	[6]
+value	 2-> 4-> 3-> 1-> 6-> 5 
+became question "142. Linked List Cycle II" from here.
+ */
 int findDuplicate(vector<int> &nums)
 {
-    if (nums.size() == 0)
-        return 0;
-
-    int sum = 0;
-    int max_value = 0;
-    for (int i = 0; i < nums.size(); i++)
+    int slow = 0;
+    int fast = 0;
+    while (true)
     {
-        sum += nums[i];
-        max_value = max(max_value, nums[i]);
+        slow = nums[slow];
+        fast = nums[nums[fast]];
+        if (slow == fast)
+            break;
     }
-
-    int sum2 = max_value + max_value * (max_value - 1) / 2;
-    int result = (sum - sum2) / (nums.size() - max_value);
-    return result;
+    slow = 0;
+    while (fast != slow)
+    {
+        slow = nums[slow];
+        fast = nums[fast];
+    }
+    return slow;
 }
 
 int main()
 {
-    vector<int> a{1, 4, 4, 2, 4};
-    // vector<int> a{1, 3, 4, 2, 2};
+    // vector<int> a{2, 2, 2, 2, 2};
+    // vector<int> a{1, 4, 4, 2, 4};
+    vector<int> a{1, 4, 2, 3, 2};
     auto c = clock();
 
     auto t = findDuplicate(a);
