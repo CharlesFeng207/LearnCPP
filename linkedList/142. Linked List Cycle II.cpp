@@ -27,15 +27,18 @@ ListNode *detectCycle(ListNode *head)
         fast = fast->next->next;
 
         /* entry point is the start point of circle
-2.1) L1 is defined as the distance between the head point and entry point
-2.2) L2 is defined as the distance between the entry point and the meeting point
-2.3) C is defined as the length of the cycle
-2.4) n is defined as the travel times of the fast pointer around the cycle.
+L1 is defined as the distance between the head point and entry point
+L2 is defined as the distance between the entry point and the meeting point
 
-assume slow pointer have k steps to meet, fast pointer have 2k steps, 2k - k = n * C
-L1 + L2 = n * C
-that means, stat from L2, move L1 steps will meet entry point 
- */
+Distance traveled by slow when they meet: L1+L2
+Distance traveled by fast when they meet: L1+L2+x+L2, where x is the remaining length of the cycle (meeting point to start of the cycle).
+
+2(L1+L2) = L1 + L2 + x + L2
+2L1 + 2L2 = L1 + 2L2 + x
+=> x = L1
+
+so we need to move L1 steps from the current meeting point to reach the entry point of the cycle.
+*/
         if (slow == fast)
         {
             slow = head;
