@@ -65,7 +65,7 @@ vector<Y> select(vector<T> &v, function<Y(T &)> func)
     return t;
 }
 
-template <class T>
+template <typename T>
 vector<T> where(vector<T> &v, function<bool(T &)> func)
 {
     vector<T> t;

@@ -32,7 +32,7 @@ public:
     }
 };
 
-template <class T>
+template <typename T>
 void printSet(T &s)
 {
     for (auto i = s.begin(); i != s.end(); i++)
