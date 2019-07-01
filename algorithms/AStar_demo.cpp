@@ -1,4 +1,4 @@
-#include "Astar.h"
+#include "AStar.h"
 #include <algorithm>
 #include <iostream>
 #include <list>
@@ -29,6 +29,8 @@ void printSolution(vector<vector<int>> &maze, list<Node> path)
     }
 }
 
+// auto AStar::testInt = 0;
+
 int main()
 {
     // system("cls");
@@ -43,14 +45,14 @@ int main()
         {1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1},
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
 
-    AStar::init(map);
-
     // while (true)
     // {
-        auto path = AStar::search(1, 1, 6, 2);
-        printSolution(*AStar::map, path);
+    auto astar = new AStar(map);
+    auto path = astar->search(1, 1, 6, 2);
+    printSolution(*map, path);
+    delete astar;
     // }
-    
+
     // Sleep(100);
     getchar();
     return 0;

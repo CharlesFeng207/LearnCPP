@@ -45,33 +45,39 @@ public:
 class AStar
 {
 public:
-    static int mapWidth;
-    static int mapHeight;
-    static vector<vector<int>> *map;
-    static vector<vector<Node *>> *allNodes;
-
-    static void init(vector<vector<int>> *map)
+    AStar(vector<vector<int>> *map) : map(map)
     {
-        AStar::map = map;
-        AStar::mapHeight = AStar::map->size();
-        AStar::mapWidth = (*AStar::map)[0].size();
+        mapHeight = map->size();
+        mapWidth = (*map)[0].size();
 
-        if (AStar::mapHeight == 0 || AStar::mapWidth == 0)
+        if (mapHeight == 0 || mapWidth == 0)
         {
             cout << "error map" << endl;
             return;
         }
-        if (AStar::allNodes != (vector<vector<Node *>> *)NULL)
-        {
-            delete AStar::allNodes;
-        }
 
-        AStar::allNodes = new vector<vector<Node *>>(mapHeight, vector<Node *>(mapWidth, (Node *)NULL));
+        allNodes = new vector<vector<Node *>>(mapHeight, vector<Node *>(mapWidth, (Node *)NULL));
     }
 
-    static list<Node> search(int startX, int startY, int endX, int endY)
+    ~AStar()
     {
-        if (AStar::allNodes == (vector<vector<Node *>> *)NULL)
+        for (auto &v1 : *allNodes)
+        {
+            for (auto &v2 : v1)
+            {
+                if (v2 != (Node *)NULL)
+                {
+                    delete v2;
+                }
+            }
+        }
+
+        delete allNodes;
+    }
+
+    list<Node> search(int startX, int startY, int endX, int endY)
+    {
+        if (allNodes == (vector<vector<Node *>> *)NULL)
         {
             cout << "init AStar first" << endl;
             return {};
@@ -141,19 +147,24 @@ public:
     }
 
 private:
-    static float calculateH(int startX, int startY, int endX, int endY)
+    int mapWidth;
+    int mapHeight;
+    vector<vector<int>> *map;
+    vector<vector<Node *>> *allNodes;
+
+    float calculateH(int startX, int startY, int endX, int endY)
     {
         int dx = startX - endX;
         int dy = startY - endY;
         return sqrt(dx * dx + dy * dy);
     }
 
-    static bool checkMap(int x, int y)
+    bool checkMap(int x, int y)
     {
-        return x >= 0 && x < AStar::mapWidth && y >= 0 && y < AStar::mapHeight && (*AStar::map)[y][x] == 0;
+        return x >= 0 && x < mapWidth && y >= 0 && y < mapHeight && (*map)[y][x] == 0;
     }
 
-    static vector<Node *> getNearNodes(int x, int y, unordered_set<Node *> &closeSet)
+    vector<Node *> getNearNodes(int x, int y, unordered_set<Node *> &closeSet)
     {
         vector<Node *> t;
         for (int i = y - 1; i <= y + 1; i++)
@@ -193,9 +204,9 @@ private:
         return t;
     }
 
-    static Node *getNode(int x, int y)
+    Node *getNode(int x, int y)
     {
-        auto &t = (*AStar::allNodes)[y][x];
+        auto &t = (*allNodes)[y][x];
         if (t == (Node *)NULL)
         {
             t = new Node(x, y);
@@ -203,7 +214,7 @@ private:
         return t;
     }
 
-    static list<Node> buildPath(Node *endNode)
+    list<Node> buildPath(Node *endNode)
     {
         list<Node> result;
 
@@ -216,9 +227,4 @@ private:
 
         return result;
     }
-};  
-
-auto AStar::mapWidth = 0;
-auto AStar::mapHeight = 0;
-auto AStar::map = (vector<vector<int>> *)NULL;
-auto AStar::allNodes = (vector<vector<Node *>> *)NULL;
+};
