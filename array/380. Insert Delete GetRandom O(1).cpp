@@ -38,8 +38,13 @@ public:
         if (m.find(val) == m.end())
             return false;
 
-        v.erase(m[val]);
+        int last = v.back();
+        
+        m[last] = m[val];
 
+        v[m[val]] = last;
+
+        v.pop_back();
         m.erase(val);
 
         return true;
