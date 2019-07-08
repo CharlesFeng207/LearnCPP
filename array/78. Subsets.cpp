@@ -31,25 +31,22 @@ void printVector(vector<T> &vector)
 
 void subset_inner(vector<int> &nums, int i, vector<int> &buffer, vector<vector<int>> &result)
 {
-    buffer.push_back(nums[i]);
     result.push_back(buffer);
 
-    for (int j = i + 1; j < nums.size(); j++)
+    for (int j = i; j < nums.size(); j++)
     {
-        vector<int> buffer2 = buffer;
-        subset_inner(nums, j, buffer2, result);
+        buffer.push_back(nums[j]);
+        subset_inner(nums, j + 1, buffer, result);
+        buffer.pop_back();
     }
 }
 
 vector<vector<int>> subsets(vector<int> &nums)
 {
     vector<vector<int>> result;
-    result.push_back({});
-    for (int i = 0; i < nums.size(); i++)
-    {
-        vector<int> buffer;
-        subset_inner(nums, i, buffer, result);
-    }
+
+    vector<int> buffer;
+    subset_inner(nums, 0, buffer, result);
 
     return result;
 }

@@ -50,7 +50,7 @@ int removeDuplicates(vector<int> &nums)
 
 int main()
 {
-    vector<int> a{0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
+    vector<int> a{0, 1, 1, 1, 1, 2, 2, 3, 3, 4};
     cout << removeDuplicates(a) << endl;
     printVector<int>(a);
 

@@ -106,6 +106,7 @@ vector<vector<int>> threeSum2(vector<int> &num)
                 triplet[0] = num[i];
                 triplet[1] = num[front];
                 triplet[2] = num[back];
+                
                 res.push_back(triplet);
 
                 // Processing duplicates of Number 2

@@ -27,6 +27,7 @@ void printVector(vector<T> &vector)
     }
 }
 
+// O(n^2)
 vector<int> twoSum(vector<int> &nums, int target)
 {
     for (int i = 0; i < nums.size() - 1; i++)
@@ -43,6 +44,7 @@ vector<int> twoSum(vector<int> &nums, int target)
     return {};
 }
 
+// O(n)
 vector<int> twoSum_Fast(vector<int> &nums, int target)
 {
     unordered_map<int, int> map;
