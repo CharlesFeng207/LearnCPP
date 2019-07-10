@@ -33,10 +33,18 @@ void preorder_no_recursive(TreeNode *node)
     stack<TreeNode *> stack;
     stack.push(node);
 
-    while(!stack.empty())
+    while (!stack.empty())
     {
-        // auto t = stack.pee
+        auto t = stack.top();
+        stack.pop();
 
+        if (t == NULL)
+            continue;
+
+        cout << t->val;
+
+        stack.push(t->right);
+        stack.push(t->left);
     }
 }
 
@@ -52,6 +60,30 @@ void inorder(TreeNode *node)
 
 void inorder_no_recursive(TreeNode *node)
 {
+    stack<pair<TreeNode *, bool>> stack;
+
+    stack.push(make_pair(node, false));
+
+    while (!stack.empty())
+    {
+        auto t = stack.top().first;
+        auto visited = stack.top().second;
+        stack.pop();
+
+        if (t == NULL)
+            continue;
+
+        if (visited)
+        {
+            cout << t->val;
+        }
+        else
+        {
+            stack.push(make_pair(t->right, false));
+            stack.push(make_pair(t, true));
+            stack.push(make_pair(t->left, false));
+        }
+    }
 }
 
 void postorder(TreeNode *node)
@@ -66,11 +98,34 @@ void postorder(TreeNode *node)
 
 void postorder_no_recursive(TreeNode *node)
 {
+    stack<pair<TreeNode *, bool>> stack;
+
+    stack.push(make_pair(node, false));
+
+    while (!stack.empty())
+    {
+        auto t = stack.top().first;
+        auto visited = stack.top().second;
+        stack.pop();
+
+        if (t == NULL)
+            continue;
+
+        if (visited)
+        {
+            cout << t->val;
+        }
+        else
+        {
+            stack.push(make_pair(t, true));
+            stack.push(make_pair(t->right, false));
+            stack.push(make_pair(t->left, false));
+        }
+    }
 }
 
 int main()
 {
-
     auto g = new TreeNode('G', (TreeNode *)NULL, (TreeNode *)NULL);
     auto h = new TreeNode('H', (TreeNode *)NULL, (TreeNode *)NULL);
     auto d = new TreeNode('D', g, h);
