@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+// https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/discuss/34538/My-Accepted-Java-Solution
 
 #include <algorithm>
 #include <iostream>
@@ -67,9 +68,33 @@ void inorder_no_recursive(TreeNode *node)
     }
 }
 
+TreeNode *build(vector<int> &preorder, int preStart, int preEnd, vector<int> &inorder, int inStart, int inEnd)
+{
+    if (preStart > preEnd || inStart > inEnd)
+        return NULL;
+
+    auto root = new TreeNode(preorder[preStart]);
+
+    int inRoot = 0;
+    for (int i = inStart; i <= inEnd; i++)
+    {
+        if (inorder[i] == root->val)
+        {
+            inRoot = i;
+            break;
+        }
+    }
+
+    int leftTreeLen = inRoot - inStart;
+    root->left = build(preorder, preStart + 1, preStart + leftTreeLen, inorder, inStart, inRoot - 1);
+    root->right = build(preorder, preStart + leftTreeLen + 1, preEnd, inorder, inRoot + 1, inEnd);
+
+    return root;
+}
+
 TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder)
 {
-    return (TreeNode *)NULL;
+    return build(preorder, 0, preorder.size() - 1, inorder, 0, inorder.size() - 1);
 }
 
 int main()
@@ -80,6 +105,7 @@ int main()
     auto tree = buildTree(preorder, inorder);
 
     preorder_no_recursive(tree);
+    cout << endl;
     inorder_no_recursive(tree);
 
     getchar();

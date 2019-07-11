@@ -73,6 +73,7 @@
         "__config": "cpp",
         "ctime": "cpp",
         "iomanip": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "set": "cpp"
     } // 效果比cpptools要好
 }

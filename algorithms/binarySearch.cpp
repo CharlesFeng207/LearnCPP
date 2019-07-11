@@ -32,6 +32,24 @@ int bineaySearch(vector<int> &a, int t)
     return inner_binearySearch(a, t, 0, a.size() - 1);
 }
 
+int bineaySearch_no_recursive(vector<int> &a, int t)
+{
+    int start = 0;
+    int end = a.size() - 1;
+
+    while (start <= end)
+    {
+        int mid = (start + end) / 2;
+        if (a[mid] == t)
+            return mid;
+        else if (mid > t)
+            end = mid - 1;
+        else
+            start = mid + 1;
+    }
+    return -1;
+}
+
 int main()
 {
     vector<int> v;
@@ -39,7 +57,10 @@ int main()
         v.push_back(i);
 
     cout << bineaySearch(v, 9991) << endl;
+    cout << bineaySearch_no_recursive(v, 9991) << endl;
+    cout << endl;
     cout << bineaySearch(v, 100001) << endl;
+    cout << bineaySearch_no_recursive(v, 100001) << endl;
 
     getchar();
 }
