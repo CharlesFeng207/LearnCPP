@@ -74,6 +74,8 @@
         "ctime": "cpp",
         "iomanip": "cpp",
         "numeric": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "__tree": "cpp",
+        "bitset": "cpp"
     } // 效果比cpptools要好
 }
