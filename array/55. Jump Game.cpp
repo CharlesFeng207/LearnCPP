@@ -12,26 +12,21 @@ using namespace std;
 
 bool canJump(vector<int> &nums)
 {
-    if (nums.size() < 2)
-        return true;
+    int reach = 0;
 
-    unordered_set iset{0};
-
-    for (int i = 0; i < nums.size(); i++)
+    for (int i = 0; i < nums.size() && reach < nums.size(); i++)
     {
-        if (iset.find(i) != iset.end())
+        if (i <= reach)
         {
-            for (int j = nums[i]; j > 0 && i + j < nums.size(); j--)
-            {
-                if (i + j == nums.size() - 1)
-                    return true;
-
-                iset.insert(i + j);
-            }
+            reach = max(reach, i + nums[i]);
+        }
+        else
+        {
+            return false;
         }
     }
 
-    return false;
+    return true;
 }
 
 int main()
