@@ -12,8 +12,7 @@
     "code-runner.clearPreviousOutput": false, // 每次run code前清空属于code runner的终端消息
     "C_Cpp.clang_format_sortIncludes": true, // 格式化时调整include的顺序（按字母排序）
     "C_Cpp.intelliSenseEngine": "Default", // 可以为Default或Tag Parser，后者较老，功能较简单。具体差别参考cpptools扩展文档
-    "C_Cpp.errorSquiggles": "Disabled", // 因为有clang的lint，所以关掉
-    "C_Cpp.autocomplete": "Disabled", // 因为有clang的补全，所以关掉
+    "C_Cpp.errorSquiggles": "Disabled", // 因为有clang的补全，所以关掉
     "clang.cflags": [ // 控制c语言静态检测的参数
         "--target=x86_64-w64-mingw",
         "-std=c11",

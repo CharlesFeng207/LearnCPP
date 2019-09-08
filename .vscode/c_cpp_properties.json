@@ -1,6 +1,24 @@
 {
     "configurations": [
         {
+            "name": "Linux",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/opt/rh/devtoolset-8/root/usr/bin/g++",
+            "includePath": [
+                "${workspaceFolder}"
+            ],
+            "defines": [],
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        },
+        {
             "name": "MinGW",
             "intelliSenseMode": "gcc-x64",
             "compilerPath": "C:/LLVM/bin/g++.exe",

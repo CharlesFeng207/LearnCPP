@@ -7,11 +7,6 @@
 
 using namespace std;
 
-template <class T, class Y>
-unordered_map<T, Y> to_unordered_map(vector<T> v, )
-{
-    
-}
 
 int main()
 {
@@ -35,6 +30,7 @@ int main()
 
     cout << "iter" << endl;
     auto iter = m.begin();
+    
     while (iter != m.end())
     {
         cout << iter->first << ':' << iter->second << endl;
