@@ -14,7 +14,7 @@ string to_manache_string(string &s, char c)
     string result(1, c);
 
     for (auto &sc : s)
-        result += sc + string(1, c);
+        result += sc + string(1, c); // Char to string
 
     return result;
 }

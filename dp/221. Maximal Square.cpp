@@ -22,7 +22,7 @@ int maximalSquare(vector<vector<char>> &matrix)
     {
         for (int j = 0; j < col; j++)
         {
-            dp[i][j] = matrix[i][j] - 48; // char to int.
+            dp[i][j] = matrix[i][j] - '0'; // char to int.
             if (i != 0 && j != 0 && dp[i][j] == 1)
             {
                 dp[i][j] = 1 + min(dp[i - 1][j - 1], min(dp[i - 1][j], dp[i][j - 1]));
