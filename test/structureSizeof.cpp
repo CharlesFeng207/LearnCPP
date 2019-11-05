@@ -1,17 +1,22 @@
 // #include <float.h>
+// https://www.cnblogs.com/zrtqsk/p/4371773.html
+
 #include <cstring>
 #include <iostream>
 
 using namespace std;
 
+struct Test
+{
+    int a;
+    char b;
+};
+
 int main()
 {
-    char str[][10] = {"Hello", "World"};
-    char *p = str[0];
-    cout << strlen(p + 10) << endl; //p是字符指针,+1位移一个 sizeof(char) 二维数组第二维长度是10，那么p+10就指向了字符w
+    Test t;
 
-    cout << sizeof(char) << endl; // 返回一个对象或者类型所占的内存字节数
-    cout << sizeof(char[10]) << endl;
+    cout << sizeof(t);
 
     getchar();
 }

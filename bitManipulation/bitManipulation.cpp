@@ -22,6 +22,11 @@ const unsigned char option7 = 1 << 7; // 1000 0000
 
 unsigned char myflags = 0; // all bits turned off to start
 
+int isPower(int n)
+{
+    return n > 0 && (n & (n - 1)) == 0;
+}
+
 int main()
 {
     /*
@@ -72,6 +77,17 @@ int main()
 
     cout << "a " << a << " b " << b << endl;
 
+    cout << "isPower: 100 ->" << isPower(100) << endl;
+
+    cout << "isPower: 200 -> " << isPower(200) << endl;
+
+    cout << "isPower: 128 -> " << isPower(128) << endl;
+
+    cout << "isPower: 2 -> " << isPower(2) << endl;
+
+    cout << ((2 > 0) && ((2 & 1) == 0)) << endl;
+
     getchar();
+
     return 0;
 }
