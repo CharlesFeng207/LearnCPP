@@ -61,24 +61,18 @@ void moveZeroes_quick_sort(vector<int> &nums)
 // time:O(n) space:O(1)， the fastest approach
 void moveZeroes_in_place(vector<int> &nums)
 {
-    if (nums.size() == 0)
-        return;
-
-    // two pointers, j is the fast runner.
+    // two pointers, j is the faster runner. j must start with 0
     int i = 0;
-    for (int j = 1; j < nums.size(); j++)
+    for (int j = 0; j < nums.size(); j++)
     {
         if (nums[j] != 0)
-        {
-            swap(nums[j], nums[i]);
-            i++;
-        }
+            swap(nums[j], nums[i++]);
     }
 }
 
 int main()
 {
-    vector<int> a{0, 1, 0, 3, 12};
+    vector<int> a{1, 1, 1, 0, 1};
     moveZeroes(a);
     printVector<int>(a);
 
@@ -89,6 +83,10 @@ int main()
     vector<int> a3{0, 1, 0, 3, 12};
     moveZeroes_in_place(a3);
     printVector<int>(a3);
+
+    vector<int> a4{1, 1, 1, 0, 1};
+    moveZeroes_in_place(a4);
+    printVector<int>(a4);
 
     getchar();
     return 0;
