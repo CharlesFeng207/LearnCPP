@@ -32,7 +32,7 @@ int bineaySearch(vector<int> &a, int t)
     return inner_binearySearch(a, t, 0, a.size() - 1);
 }
 
-int bineaySearch_no_recursive(vector<int> &a, int t)
+int binarySearch_no_recursive(vector<int> &a, int t)
 {
     int start = 0;
     int end = a.size() - 1;

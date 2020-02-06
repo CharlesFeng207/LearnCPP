@@ -15,7 +15,7 @@ struct TreeNode
     char val;
     TreeNode *left;
     TreeNode *right;
-    TreeNode(char x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+    TreeNode(char v, TreeNode *left, TreeNode *right) : val(v), left(left), right(right) {}
 };
 
 void preorder(TreeNode *node)
@@ -67,13 +67,13 @@ void inorder_no_recursive(TreeNode *node)
     while (!stack.empty())
     {
         auto t = stack.top().first;
-        auto visited = stack.top().second;
+        auto visit = stack.top().second;
         stack.pop();
 
         if (t == NULL)
             continue;
 
-        if (visited)
+        if (visit)
         {
             cout << t->val;
         }
@@ -105,13 +105,13 @@ void postorder_no_recursive(TreeNode *node)
     while (!stack.empty())
     {
         auto t = stack.top().first;
-        auto visited = stack.top().second;
+        auto visit = stack.top().second;
         stack.pop();
 
         if (t == NULL)
             continue;
 
-        if (visited)
+        if (visit)
         {
             cout << t->val;
         }
@@ -127,16 +127,13 @@ void postorder_no_recursive(TreeNode *node)
 int main()
 {
     auto g = new TreeNode('G', (TreeNode *)NULL, (TreeNode *)NULL);
-    auto h = new TreeNode('H', (TreeNode *)NULL, (TreeNode *)NULL);
-    auto d = new TreeNode('D', g, h);
+    auto d = new TreeNode('D', (TreeNode *)NULL, (TreeNode *)NULL);
     auto e = new TreeNode('E', (TreeNode *)NULL, (TreeNode *)NULL);
-    auto b = new TreeNode('B', d, e);
+    auto f = new TreeNode('F', (TreeNode *)NULL, (TreeNode *)NULL);
 
-    auto j = new TreeNode('J', (TreeNode *)NULL, (TreeNode *)NULL);
-    auto i = new TreeNode('I', (TreeNode *)NULL, j);
-    auto f = new TreeNode('F', i, (TreeNode *)NULL);
-    auto k = new TreeNode('K', (TreeNode *)NULL, (TreeNode *)NULL);
-    auto c = new TreeNode('C', k, f);
+    auto b = new TreeNode('B', d, e);
+  
+    auto c = new TreeNode('C', f, g);
 
     auto a = new TreeNode('A', b, c);
 

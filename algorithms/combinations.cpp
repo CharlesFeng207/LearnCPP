@@ -63,8 +63,7 @@ vector<T> combinations(T &v, int count)
 template <typename T>
 vector<T> combinations(string &v, int count)
 {
-    auto size = v.size();
-    if (count > size)
+    if (count > v.size())
         return {};
 
     vector<T> result;

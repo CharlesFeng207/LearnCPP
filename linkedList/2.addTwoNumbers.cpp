@@ -41,24 +41,22 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
     auto t1 = l1;
     auto t2 = l2;
 
-    int bonus = 0;
+    int carry = 0;
     ListNode *result = NULL;
     ListNode *pre = NULL;
 
-    while (t1 != NULL || t2 != NULL || bonus != 0)
+    while (t1 != NULL || t2 != NULL || carry != 0)
     {
         int tv1 = t1 == NULL ? 0 : t1->val;
         int tv2 = t2 == NULL ? 0 : t2->val;
 
-        int t = bonus + tv1 + tv2;
-        bonus = t >= 10;
+        int t = carry + tv1 + tv2;
+        carry = t >= 10;
         int tv3 = t % 10;
 
         auto node = new ListNode(tv3);
         if (result == NULL)
-        {
             result = node;
-        }
 
         if (pre != NULL)
         {

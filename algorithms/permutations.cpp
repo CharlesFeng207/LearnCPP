@@ -35,7 +35,7 @@ void inner_permutations(T &v, int currentDepth, int endingDepth, vector<T> &resu
         for (auto i = currentDepth; i <= endingDepth; i++)
         {
             swap(v[currentDepth], v[i]);
-    
+
             inner_permutations(v, currentDepth + 1, endingDepth, result);
 
             swap(v[currentDepth], v[i]); //backtrack
@@ -57,8 +57,7 @@ vector<T> permutations(T &v)
     }
 
     auto endingDepth = v.size() - 1;
-    if (endingDepth > 0)
-        inner_permutations(v, 0, endingDepth, result);
+    inner_permutations(v, 0, endingDepth, result);
     return result;
 }
 

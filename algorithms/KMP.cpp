@@ -8,6 +8,8 @@ using namespace std;
 vector<int> KMP_pre_DP(string &t)
 {
     vector<int> dp(t.size(), 0);
+
+    // n从1开始加规模，其实就是看新的字符能不能和以上一次的数值做索引的字符匹配得上不
     for (int i = 1; i < t.size(); i++)
     {
         int pre = dp[i - 1];
@@ -27,8 +29,9 @@ vector<int> KMP_pre_DP(string &t)
 // Algorithm complexity O(n)
 bool KMP(string &s, string &t)
 {
-    int size = s.size() - t.size();
     auto f = KMP_pre_DP(t);
+
+    int size = s.size() - t.size();
 
     for (int i = 0; i < size;)
     {
@@ -36,7 +39,8 @@ bool KMP(string &s, string &t)
         {
             if (s[i + j] != t[j])
             {
-                int step = j == 0 ? 1 : j - f[j - 1] + 1;
+                // 移动位数 = 已匹配的字符数 - 对应的部分匹配值
+                int step = j == 0 ? 1 : j - f[j - 1];
                 i += step;
                 break;
             }
@@ -91,6 +95,7 @@ void test_case(string s, int n, string target)
     }
     else
     {
+
         cout << "STL found" << endl;
     }
 
@@ -125,11 +130,10 @@ void test_case(string s, int n, string target)
 
 // string s("ABCDABD");
 // string s("abcabcab");
-string s("kjgmns");
+string s("abcabcabc");
 
 void test_kmp_pre()
 {
-
     cout << endl
          << "KMP_pre_DP" << endl;
 
@@ -145,7 +149,7 @@ int main()
 {
     test_kmp_pre();
 
-    test_case("abcddfkjgmnsmgksdmf", 10000000, s);
+    test_case("abcddfkjgmnabcsmgksabcabc", 1000000, s);
     // test_case("abcddfkjgmnsmgksdmf", 10000000, "abcddfkjgmnsmgksdmfa");
     getchar();
 

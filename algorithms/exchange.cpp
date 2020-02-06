@@ -59,7 +59,9 @@ vector<int> exchange(int t)
 
 int main()
 {
-    printVector<int>(exchange(1599));
-    
+    auto result = exchange(1599);
+
+    printVector<int>(result);
+
     getchar();
 }

@@ -4,15 +4,15 @@
 
 using namespace std;
 
-void shuffle(int *a, int len)
+void shuffle(int *a, int n)
 {
-    if (len <= 0)
+    if (n <= 0)
         return;
 
-    for (int i = 0; i < len; i++)
+    for (int i = 0; i < n; i++)
     {
-        int r = i + rand() % (len - i);
-        swap(a[i], a[r]);
+        int j = i + rand() % (n - i);
+        swap(a[i], a[j]);
     }
 }
 
